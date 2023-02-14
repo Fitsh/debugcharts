@@ -28,9 +28,9 @@ import (
 	"sync"
 	"time"
 
+	"github.com/Fitsh/debugcharts/bindata"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
-	"github.com/mkevac/debugcharts/bindata"
 	"github.com/shirou/gopsutil/cpu"
 	"github.com/shirou/gopsutil/process"
 )

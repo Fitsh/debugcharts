@@ -4,14 +4,11 @@ go 1.17
 
 require (
 	github.com/gin-gonic/gin v1.8.2
-	github.com/gorilla/handlers v1.5.1
 	github.com/gorilla/websocket v1.5.0
-	github.com/mkevac/debugcharts v0.0.0-20191222103121-ae1c48aa8615
 	github.com/shirou/gopsutil v3.21.11+incompatible
 )
 
 require (
-	github.com/felixge/httpsnoop v1.0.1 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/go-ole/go-ole v1.2.6 // indirect
 	github.com/go-playground/locales v0.14.0 // indirect
