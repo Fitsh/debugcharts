@@ -7,11 +7,11 @@ This package uses [Plotly](https://github.com/plotly/plotly.js) chart library. I
 
 Installation
 ------------
-`go get -v -u github.com/mkevac/debugcharts`
+`go get -v -u github.com/Fitsh/debugcharts`
 
 Usage
 -----
-Just install package and start http server. There is an example program [here](https://github.com/mkevac/debugcharts/blob/master/example/example.go).
+Just install package and start http server. There is an example program [here](https://github.com/Fitsh/debugcharts/blob/gin/example/example.go).
 
 Then go to `http://localhost:8080/debug/charts`. You should see something like this:
 <img src="example/screenshot.png" />
@@ -26,7 +26,7 @@ You can add tagged file like this in your code
 
 package main
 
-import _ "github.com/mkevac/debugcharts"
+import  "github.com/Fitsh/debugcharts"
 ```
 If you want to use debugcharts, then build your project with `-tags debugcharts`
 

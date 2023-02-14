@@ -9,8 +9,8 @@ import (
 
 	_ "net/http/pprof"
 
-	"github.com/gorilla/handlers"
-	_ "github.com/mkevac/debugcharts"
+	"github.com/Fitsh/debugcharts"
+	"github.com/gin-gonic/gin"
 )
 
 func dummyCPUUsage() {
@@ -40,8 +40,10 @@ func dummyAllocations() {
 func main() {
 	go dummyAllocations()
 	go dummyCPUUsage()
+	h := gin.New()
+	debugcharts.Register(h)
 	go func() {
-		log.Fatal(http.ListenAndServe(":8080", handlers.CompressHandler(http.DefaultServeMux)))
+		log.Fatal(http.ListenAndServe(":8080", h))
 	}()
 	log.Printf("you can now open http://localhost:8080/debug/charts/ in your browser")
 	select {}

@@ -173,14 +173,20 @@ func (s *server) gatherData() {
 	}
 }
 
+func ginHandle(f func(http.ResponseWriter, *http.Request)) func(*gin.Context) {
+	return func(c *gin.Context) {
+		f(c.Writer, c.Request)
+	}
+}
+
 func Register(gin *gin.Engine) {
-	gin.GET("/debug/charts/data-feed", s.dataFeedHandler)
-	gin.GET("/debug/charts/data", dataHandler)
-	gin.GET("/debug/charts/", handleAsset("static/index.html"))
-	gin.GET("/debug/charts/main.js", handleAsset("static/main.js"))
-	gin.GET("/debug/charts/jquery-2.1.4.min.js", handleAsset("static/jquery-2.1.4.min.js"))
-	gin.GET("/debug/charts/plotly-1.51.3.min.js", handleAsset("static/plotly-1.51.3.min.js"))
-	gin.GET("/debug/charts/moment.min.js", handleAsset("static/moment.min.js"))
+	gin.GET("/debug/charts/data-feed", ginHandle(s.dataFeedHandler))
+	gin.GET("/debug/charts/data", ginHandle(dataHandler))
+	gin.GET("/debug/charts/", ginHandle(handleAsset("static/index.html")))
+	gin.GET("/debug/charts/main.js", ginHandle(handleAsset("static/main.js")))
+	gin.GET("/debug/charts/jquery-2.1.4.min.js", ginHandle(handleAsset("static/jquery-2.1.4.min.js")))
+	gin.GET("/debug/charts/plotly-1.51.3.min.js", ginHandle(handleAsset("static/plotly-1.51.3.min.js")))
+	gin.GET("/debug/charts/moment.min.js", ginHandle(handleAsset("static/moment.min.js")))
 
 	myProcess, _ = process.NewProcess(int32(os.Getpid()))
 
