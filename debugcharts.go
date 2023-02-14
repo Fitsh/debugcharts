@@ -28,6 +28,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"github.com/mkevac/debugcharts/bindata"
 	"github.com/shirou/gopsutil/cpu"
@@ -172,14 +173,14 @@ func (s *server) gatherData() {
 	}
 }
 
-func init() {
-	http.HandleFunc("/debug/charts/data-feed", s.dataFeedHandler)
-	http.HandleFunc("/debug/charts/data", dataHandler)
-	http.HandleFunc("/debug/charts/", handleAsset("static/index.html"))
-	http.HandleFunc("/debug/charts/main.js", handleAsset("static/main.js"))
-	http.HandleFunc("/debug/charts/jquery-2.1.4.min.js", handleAsset("static/jquery-2.1.4.min.js"))
-	http.HandleFunc("/debug/charts/plotly-1.51.3.min.js", handleAsset("static/plotly-1.51.3.min.js"))
-	http.HandleFunc("/debug/charts/moment.min.js", handleAsset("static/moment.min.js"))
+func Register(gin *gin.Engine) {
+	gin.GET("/debug/charts/data-feed", s.dataFeedHandler)
+	gin.GET("/debug/charts/data", dataHandler)
+	gin.GET("/debug/charts/", handleAsset("static/index.html"))
+	gin.GET("/debug/charts/main.js", handleAsset("static/main.js"))
+	gin.GET("/debug/charts/jquery-2.1.4.min.js", handleAsset("static/jquery-2.1.4.min.js"))
+	gin.GET("/debug/charts/plotly-1.51.3.min.js", handleAsset("static/plotly-1.51.3.min.js"))
+	gin.GET("/debug/charts/moment.min.js", handleAsset("static/moment.min.js"))
 
 	myProcess, _ = process.NewProcess(int32(os.Getpid()))
 
